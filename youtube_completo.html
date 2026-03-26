@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Clone - Completo e Funcional</title>
+  <!-- Link para o arquivo CSS externo -->
+  <link rel="stylesheet" href="youtube_completo.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVBAR - BARRA DE NAVEGAÇÃO SUPERIOR FIXA
+       ============================================================
+       
+       A navbar é a barra que fica no topo da página.
+       Ela contém:
+       - Logo do YouTube (esquerda)
+       - Barra de pesquisa (centro)
+       - Botões de ação (direita): criar, notificações, login
+       
+       A navbar é FIXA (position: fixed) para que fique
+       sempre visível mesmo quando fazemos scroll.
+  -->
+  <nav class="navbar">
+    <!-- Logo do YouTube (esquerda) -->
+    <div class="navbar__left">
+      <div class="navbar__logo">
+        <span class="navbar__logo-icon">▶</span>
+        <span class="navbar__logo-text">YouTube</span>
+      </div>
+    </div>
+
+    <!-- Barra de pesquisa (centro) -->
+    <div class="navbar__center">
+      <input 
+        type="text" 
+        class="navbar__search-input" 
+        placeholder="Pesquisar..."
+        id="searchInput"
+      >
+      <button class="navbar__search-btn" id="searchBtn">🔍</button>
+    </div>
+
+    <!-- Botões de ação (direita) -->
+    <div class="navbar__right">
+      <!-- Botão de criar vídeo -->
+      <button class="navbar__icon-btn" title="Criar">📹</button>
+      
+      <!-- Botão de notificações -->
+      <button class="navbar__icon-btn" title="Notificações">
+        🔔
+        <span class="navbar__notification-badge">3</span>
+      </button>
+      
+      <!-- Botão de login/perfil -->
+      <button class="navbar__login-btn" id="loginBtn">Entrar</button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       CONTAINER PRINCIPAL COM GRID
+       ============================================================
+       
+       Este é o container que organiza toda a página usando CSS Grid.
+       Ele divide a página em:
+       - Coluna 1: Sidebar (menu lateral)
+       - Coluna 2: Main content (conteúdo principal)
+       
+       O grid é definido no CSS com:
+       grid-template-columns: 250px 1fr;
+  -->
+  <div class="grid-container">
+
+    <!-- ============================================================
+         SIDEBAR - MENU LATERAL ESQUERDO
+         ============================================================
+         
+         A sidebar contém links de navegação:
+         - Home
+         - Em alta
+         - Inscrições
+         - Biblioteca
+         - Histórico
+         
+         Cada item é um botão que pode ser clicado.
+    -->
+    <aside class="sidebar">
+      <div class="sidebar__item sidebar__item--active" data-page="home">
+        <span class="sidebar__icon">🏠</span>
+        <span class="sidebar__label">Home</span>
+      </div>
+      <div class="sidebar__item" data-page="trending">
+        <span class="sidebar__icon">🔥</span>
+        <span class="sidebar__label">Em alta</span>
+      </div>
+      <div class="sidebar__item" data-page="subscriptions">
+        <span class="sidebar__icon">📺</span>
+        <span class="sidebar__label">Inscrições</span>
+      </div>
+      <div class="sidebar__item" data-page="library">
+        <span class="sidebar__icon">📚</span>
+        <span class="sidebar__label">Biblioteca</span>
+      </div>
+      <div class="sidebar__item" data-page="history">
+        <span class="sidebar__icon">⏱️</span>
+        <span class="sidebar__label">Histórico</span>
+      </div>
+    </aside>
+
+    <!-- ============================================================
+         MAIN CONTENT - CONTEÚDO PRINCIPAL
+         ============================================================
+         
+         Este é o container que contém:
+         - Player de vídeo
+         - Informações do vídeo
+         - Botões de ação (like, dislike, compartilhar)
+         - Informações do canal
+         - Comentários
+         - Sidebar de vídeos recomendados
+         
+         Usa CSS Grid interno para dividir em:
+         - Coluna 1: Vídeo principal (2/3 da largura)
+         - Coluna 2: Vídeos recomendados (1/3 da largura)
+    -->
+    <main class="main-content">
+
+      <!-- ============================================================
+           SEÇÃO DO VÍDEO PRINCIPAL
+           ============================================================
+           
+           Contém o player de vídeo e todas as informações relacionadas.
+      -->
+      <section class="video-section">
+
+        <!-- ============================================================
+             PLAYER DE VÍDEO - IFRAME DO YOUTUBE
+             ============================================================
+             
+             O iframe é a forma de incorporar um vídeo do YouTube
+             diretamente na nossa página.
+             
+             O 'src' aponta para o vídeo usando o ID do YouTube.
+             Para extrair o ID de uma URL do YouTube:
+             - URL: https://youtu.be/nWEil-UhYWg?si=zutEMob7RRHNOtHE
+             - ID: nWEil-UhYWg (parte após youtu.be/)
+             
+             O embed URL fica: https://www.youtube.com/embed/nWEil-UhYWg
+        -->
+        <div class="video-player">
+          <iframe
+            class="video-player__iframe"
+            src="https://www.youtube.com/embed/nWEil-UhYWg"
+            title="Vídeo do YouTube"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+          </iframe>
+        </div>
+
+        <!-- ============================================================
+             TÍTULO DO VÍDEO
+             ============================================================
+             
+             Título grande e em negrito do vídeo.
+        -->
+        <h1 class="video-title">Anitta - Envolver (Official Video)</h1>
+
+        <!-- ============================================================
+             INFORMAÇÕES DO VÍDEO - USANDO CSS GRID
+             ============================================================
+             
+             Este container usa CSS Grid para organizar:
+             - Coluna 1: Avatar + Nome do canal + Inscritos
+             - Coluna 2: Botão de inscrever-se
+             
+             grid-template-columns: 1fr auto;
+             - 1fr: informações do canal ocupam o espaço disponível
+             - auto: botão ajusta ao seu tamanho
+        -->
+        <div class="video-info">
+          <!-- Informações do canal (avatar, nome, inscritos) -->
+          <div class="channel-info">
+            <!-- Avatar do canal -->
+            <img 
+              src="https://yt3.ggpht.com/ytc/AIdro_kVbGiJMNHNpMnMNGqCQPGLFGDKFEuL_-YkTsJf=s88-c-k-c0x00ffffff-no-rj" 
+              alt="Avatar do canal" 
+              class="channel-info__avatar"
+            >
+            
+            <!-- Detalhes do canal (nome e inscritos) -->
+            <div class="channel-info__details">
+              <p class="channel-info__name">Anitta</p>
+              <p class="channel-info__subscribers">50 mi de inscritos</p>
+            </div>
+          </div>
+
+          <!-- Botão de inscrever-se -->
+          <button class="subscribe-btn" id="subscribeBtn">Inscrever-se</button>
+        </div>
+
+        <!-- ============================================================
+             AÇÕES DO VÍDEO - USANDO CSS GRID
+             ============================================================
+             
+             Botões de like, dislike, compartilhar e salvar
+             organizados em uma linha usando CSS Grid.
+             
+             grid-template-columns: repeat(4, 1fr);
+             - Cria 4 colunas iguais para os 4 botões
+             
+             Cada botão tem um ID para que o JavaScript possa
+             adicionar interatividade (contar likes, etc).
+        -->
+        <div class="video-actions">
+          <!-- Botão de like (curtir) -->
+          <button class="action-btn action-btn--like" id="likeBtn">
+            👍 <span id="likeCount">1.2M</span>
+          </button>
+          
+          <!-- Botão de dislike (não curtir) -->
+          <button class="action-btn action-btn--dislike" id="dislikeBtn">
+            👎
+          </button>
+          
+          <!-- Botão de compartilhar -->
+          <button class="action-btn action-btn--share" id="shareBtn">
+            ↗️ Compartilhar
+          </button>
+          
+          <!-- Botão de salvar -->
+          <button class="action-btn action-btn--save" id="saveBtn">
+            💾 Salvar
+          </button>
+        </div>
+
+        <!-- ============================================================
+             DESCRIÇÃO DO VÍDEO
+             ============================================================
+             
+             Texto descritivo do vídeo com informações sobre o artista,
+             links para redes sociais, etc.
+             
+             Tem um botão "...mais" para expandir/recolher a descrição.
+        -->
+        <div class="video-description" id="videoDescription">
+          <p><strong>100 milhões de visualizações • 21 de fev. de 2021</strong></p>
+          <p>Anitta - Envolver (Official Video)</p>
+          <p>Ouça "Envolver" em todas as plataformas: https://anitta.lnk.to/Envolver</p>
+          <p>Siga Anitta:</p>
+          <p>Instagram: https://www.instagram.com/anitta</p>
+          <p>Twitter: https://twitter.com/Anitta</p>
+          <button class="description-toggle" id="descriptionToggle">...mais</button>
+        </div>
+
+        <!-- ============================================================
+             SEÇÃO DE COMENTÁRIOS
+             ============================================================
+             
+             Contém:
+             - Título "Comentários"
+             - Campo para adicionar novo comentário
+             - Lista de comentários existentes
+             
+             Usa flexbox para organizar os comentários em coluna.
+        -->
+        <section class="comments-section">
+          <h2 class="comments-section__title">Comentários</h2>
+          
+          <!-- ============================================================
+               CAMPO PARA ADICIONAR NOVO COMENTÁRIO
+               ============================================================
+               
+               Usa flexbox para organizar avatar e input em linha.
+               
+               display: flex;
+               - Organiza avatar e input horizontalmente
+               
+               align-items: flex-start;
+               - Alinha no topo (não no centro)
+          -->
+          <div class="comment-input">
+            <!-- Avatar do usuário logado -->
+            <img 
+              src="https://yt3.ggpht.com/ytc/AIdro_kVbGiJMNHNpMnMNGqCQPGLFGDKFEuL_-YkTsJf=s32-c-k-c0x00ffffff-no-rj" 
+              alt="Seu avatar" 
+              class="comment-input__avatar"
+            >
+            
+            <!-- Campo de texto para comentário -->
+            <input 
+              type="text" 
+              placeholder="Adicionar um comentário..." 
+              class="comment-input__field"
+              id="commentInput"
+            >
+          </div>
+
+          <!-- ============================================================
+               LISTA DE COMENTÁRIOS
+               ============================================================
+               
+               Cada comentário é um grid que contém:
+               - Coluna 1: Avatar do usuário (auto)
+               - Coluna 2: Conteúdo do comentário (1fr)
+               
+               grid-template-columns: auto 1fr;
+               - auto: avatar ajusta ao seu tamanho
+               - 1fr: conteúdo ocupa o resto do espaço
+          -->
+          <div class="comments-list" id="commentsList">
+            
+            <!-- Comentário 1 -->
+            <div class="comment">
+              <img 
+                src="https://yt3.ggpht.com/ytc/AIdro_nJCBdnLBBVBjZAGzLh9kKHKJFMSqYHVBCCRoI=s32-c-k-c0x00ffffff-no-rj" 
+                alt="Avatar" 
+                class="comment__avatar"
+              >
+              <div class="comment__content">
+                <p class="comment__author">@usuario1 • há 3 meses</p>
+                <p class="comment__text">Que música incrível! Anitta arrasou demais nesse videoclipe. 🔥</p>
+                <div class="comment__actions">
+                  <button class="comment__like-btn">👍 <span>2.3K</span></button>
+                  <button class="comment__dislike-btn">👎</button>
+                  <button class="comment__reply-btn">Responder</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comentário 2 -->
+            <div class="comment">
+              <img 
+                src="https://yt3.ggpht.com/ytc/AIdro_m8KkNvhBQQHDDSJLzA4Kn2FkFHNpMnMNGqCQPG=s32-c-k-c0x00ffffff-no-rj" 
+                alt="Avatar" 
+                class="comment__avatar"
+              >
+              <div class="comment__content">
+                <p class="comment__author">@usuario2 • há 2 meses</p>
+                <p class="comment__text">Envolver é uma obra de arte! A produção do vídeo é simplesmente perfeita.</p>
+                <div class="comment__actions">
+                  <button class="comment__like-btn">👍 <span>1.8K</span></button>
+                  <button class="comment__dislike-btn">👎</button>
+                  <button class="comment__reply-btn">Responder</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comentário 3 -->
+            <div class="comment">
+              <img 
+                src="https://yt3.ggpht.com/ytc/AIdro_nJCBdnLBBVBjZAGzLh9kKHKJFMSqYHVBCCRoI=s32-c-k-c0x00ffffff-no-rj" 
+                alt="Avatar" 
+                class="comment__avatar"
+              >
+              <div class="comment__content">
+                <p class="comment__author">@usuario3 • há 1 mês</p>
+                <p class="comment__text">Anitta é talentosa demais! Essa música marcou época. 💜</p>
+                <div class="comment__actions">
+                  <button class="comment__like-btn">👍 <span>956</span></button>
+                  <button class="comment__dislike-btn">👎</button>
+                  <button class="comment__reply-btn">Responder</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </section>
+
+      <!-- ============================================================
+           SIDEBAR DE VÍDEOS RECOMENDADOS
+           ============================================================
+           
+           Contém uma lista de vídeos sugeridos para o usuário assistir.
+           
+           Todos os vídeos são do mesmo gênero/artista para manter
+           a coerência com o vídeo principal (Anitta - Envolver).
+           
+           Cada vídeo é um card que contém:
+           - Thumbnail (imagem de capa)
+           - Título do vídeo
+           - Nome do canal
+           - Visualizações e data
+      -->
+      <aside class="recommendations-sidebar">
+        <h2 class="recommendations-sidebar__title">Vídeos recomendados</h2>
+
+        <!-- ============================================================
+             GRID DE VÍDEOS RECOMENDADOS
+             ============================================================
+             
+             Cada vídeo é um grid com:
+             grid-template-columns: auto 1fr;
+             - auto: thumbnail (120px)
+             - 1fr: informações (título, canal, etc.)
+        -->
+        <div class="recommended-videos">
+
+          <!-- Vídeo recomendado 1: Anitta - Sim ou Não -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/Iy6p1tMxW1Q/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Sim ou Não (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">80 mi visualizações • há 2 anos</p>
+            </div>
+          </div>
+
+          <!-- Vídeo recomendado 2: Anitta - Medicina -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/lfQHfArDxqA/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Medicina (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">120 mi visualizações • há 1 ano</p>
+            </div>
+          </div>
+
+          <!-- Vídeo recomendado 3: Anitta - Kisses and Cake -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/0Jvd9vDYRzQ/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Kisses and Cake (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">95 mi visualizações • há 3 anos</p>
+            </div>
+          </div>
+
+          <!-- Vídeo recomendado 4: Anitta - Bola, Rebola -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/2dCYBwBbJjc/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Bola, Rebola (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">150 mi visualizações • há 4 anos</p>
+            </div>
+          </div>
+
+          <!-- Vídeo recomendado 5: Anitta - Vai Malandra -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/pBbkJIVZjNk/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Vai Malandra (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">200 mi visualizações • há 5 anos</p>
+            </div>
+          </div>
+
+          <!-- Vídeo recomendado 6: Anitta - Fumaça -->
+          <div class="video-card">
+            <img 
+              src="https://i.ytimg.com/vi/Iy6p1tMxW1Q/hqdefault.jpg" 
+              alt="Thumbnail" 
+              class="video-card__thumbnail"
+            >
+            <div class="video-card__info">
+              <p class="video-card__title">Anitta - Fumaça (Official Video)</p>
+              <p class="video-card__channel">Anitta</p>
+              <p class="video-card__stats">75 mi visualizações • há 1 ano</p>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </main>
+
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT - INTERATIVIDADE DA PÁGINA
+       ============================================================
+       
+       O JavaScript adiciona funcionalidades interativas à página:
+       - Contar likes ao clicar no botão
+       - Alternar estado do botão de inscrever-se
+       - Adicionar comentários
+       - Expandir/recolher descrição
+       - Navegação na sidebar
+       - Sistema de login
+  -->
+  <script>
+
+    // ============================================================
+    // 1. SISTEMA DE LIKES
+    // ============================================================
+    // 
+    // Quando o usuário clica no botão de like, o contador aumenta.
+    // O estado do botão é armazenado em uma variável.
+
+    let isLiked = false; // Variável que controla se o vídeo foi curtido
+
+    // Seleciona o botão de like pelo ID
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCount = document.getElementById('likeCount');
+
+    // Adiciona um listener para o clique no botão de like
+    likeBtn.addEventListener('click', function() {
+      // Se já foi curtido, remove o like
+      if (isLiked) {
+        isLiked = false;
+        likeBtn.classList.remove('action-btn--liked');
+        likeCount.textContent = '1.2M'; // Volta ao valor original
+      } else {
+        // Se não foi curtido, adiciona o like
+        isLiked = true;
+        likeBtn.classList.add('action-btn--liked');
+        likeCount.textContent = '1.2M+'; // Adiciona um sinal de +
+      }
+    });
+
+    // ============================================================
+    // 2. SISTEMA DE INSCRIÇÃO
+    // ============================================================
+    //
+    // Quando o usuário clica em "Inscrever-se", o botão muda
+    // para "Inscrito" e volta para "Inscrever-se" se clicar novamente.
+
+    let isSubscribed = false; // Variável que controla se o usuário está inscrito
+
+    // Seleciona o botão de inscrever-se pelo ID
+    const subscribeBtn = document.getElementById('subscribeBtn');
+
+    // Adiciona um listener para o clique no botão de inscrever-se
+    subscribeBtn.addEventListener('click', function() {
+      // Se já está inscrito, desinscreve
+      if (isSubscribed) {
+        isSubscribed = false;
+        subscribeBtn.textContent = 'Inscrever-se';
+        subscribeBtn.classList.remove('subscribe-btn--subscribed');
+      } else {
+        // Se não está inscrito, inscreve
+        isSubscribed = true;
+        subscribeBtn.textContent = 'Inscrito ✓';
+        subscribeBtn.classList.add('subscribe-btn--subscribed');
+      }
+    });
+
+    // ============================================================
+    // 3. SISTEMA DE LOGIN
+    // ============================================================
+    //
+    // Quando o usuário clica em "Entrar", um alerta é exibido.
+    // Em uma aplicação real, isso abriria um modal de login.
+
+    const loginBtn = document.getElementById('loginBtn');
+
+    loginBtn.addEventListener('click', function() {
+      // Exibe um alerta (em produção, seria um modal)
+      alert('Funcionalidade de login será implementada em breve!');
+    });
+
+    // ============================================================
+    // 4. EXPANDIR/RECOLHER DESCRIÇÃO
+    // ============================================================
+    //
+    // Quando o usuário clica em "...mais", a descrição se expande.
+    // Se clicar novamente, a descrição se recolhe.
+
+    let isDescriptionExpanded = false; // Variável que controla se a descrição está expandida
+
+    // Seleciona o botão de toggle e a descrição
+    const descriptionToggle = document.getElementById('descriptionToggle');
+    const videoDescription = document.getElementById('videoDescription');
+
+    // Adiciona um listener para o clique no botão
+    descriptionToggle.addEventListener('click', function() {
+      // Se a descrição está recolhida, expande
+      if (!isDescriptionExpanded) {
+        isDescriptionExpanded = true;
+        videoDescription.classList.add('video-description--expanded');
+        descriptionToggle.textContent = 'Mostrar menos';
+      } else {
+        // Se a descrição está expandida, recolhe
+        isDescriptionExpanded = false;
+        videoDescription.classList.remove('video-description--expanded');
+        descriptionToggle.textContent = '...mais';
+      }
+    });
+
+    // ============================================================
+    // 5. ADICIONAR COMENTÁRIOS
+    // ============================================================
+    //
+    // Quando o usuário digita um comentário e pressiona Enter,
+    // o comentário é adicionado à lista de comentários.
+
+    const commentInput = document.getElementById('commentInput');
+    const commentsList = document.getElementById('commentsList');
+
+    // Adiciona um listener para a tecla Enter no campo de comentário
+    commentInput.addEventListener('keypress', function(event) {
+      // Se a tecla pressionada foi Enter
+      if (event.key === 'Enter' && this.value.trim() !== '') {
+        // Cria um novo elemento de comentário
+        const newComment = document.createElement('div');
+        newComment.className = 'comment';
+        newComment.innerHTML = `
+          <img 
+            src="https://yt3.ggpht.com/ytc/AIdro_kVbGiJMNHNpMnMNGqCQPGLFGDKFEuL_-YkTsJf=s32-c-k-c0x00ffffff-no-rj" 
+            alt="Avatar" 
+            class="comment__avatar"
+          >
+          <div class="comment__content">
+            <p class="comment__author">Você • agora</p>
+            <p class="comment__text">${this.value}</p>
+            <div class="comment__actions">
+              <button class="comment__like-btn">👍 <span>0</span></button>
+              <button class="comment__dislike-btn">👎</button>
+              <button class="comment__reply-btn">Responder</button>
+            </div>
+          </div>
+        `;
+
+        // Adiciona o novo comentário ao topo da lista
+        commentsList.insertBefore(newComment, commentsList.firstChild);
+
+        // Limpa o campo de entrada
+        this.value = '';
+      }
+    });
+
+    // ============================================================
+    // 6. NAVEGAÇÃO NA SIDEBAR
+    // ============================================================
+    //
+    // Quando o usuário clica em um item da sidebar,
+    // o item ativo é destacado.
+
+    // Seleciona todos os itens da sidebar
+    const sidebarItems = document.querySelectorAll('.sidebar__item');
+
+    // Adiciona um listener para cada item
+    sidebarItems.forEach(item => {
+      item.addEventListener('click', function() {
+        // Remove a classe ativa de todos os itens
+        sidebarItems.forEach(i => i.classList.remove('sidebar__item--active'));
+
+        // Adiciona a classe ativa ao item clicado
+        this.classList.add('sidebar__item--active');
+
+        // Em uma aplicação real, isso mudaria o conteúdo da página
+        const page = this.dataset.page;
+        console.log('Navegando para:', page);
+      });
+    });
+
+    // ============================================================
+    // 7. SISTEMA DE PESQUISA
+    // ============================================================
+    //
+    // Quando o usuário digita na barra de pesquisa e clica no botão,
+    // uma ação de pesquisa é executada.
+
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    // Adiciona um listener para o clique no botão de pesquisa
+    searchBtn.addEventListener('click', function() {
+      const query = searchInput.value.trim();
+      if (query !== '') {
+        // Em uma aplicação real, isso faria uma requisição ao servidor
+        console.log('Pesquisando por:', query);
+        alert('Pesquisando por: ' + query);
+      }
+    });
+
+    // Também permite pesquisar ao pressionar Enter
+    searchInput.addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        searchBtn.click();
+      }
+    });
+
+    // ============================================================
+    // 8. SISTEMA DE LIKE/DISLIKE NOS COMENTÁRIOS
+    // ============================================================
+    //
+    // Quando o usuário clica em like/dislike em um comentário,
+    // o contador aumenta ou diminui.
+
+    // Seleciona todos os botões de like nos comentários
+    const commentLikeBtns = document.querySelectorAll('.comment__like-btn');
+
+    // Adiciona um listener para cada botão
+    commentLikeBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        // Seleciona o span que contém o número de likes
+        const likeCountSpan = this.querySelector('span');
+        // Converte o texto para número
+        let count = parseInt(likeCountSpan.textContent);
+        // Aumenta o contador
+        count++;
+        // Atualiza o texto
+        likeCountSpan.textContent = count;
+      });
+    });
+
+  </script>
+
+</body>
+</html>
