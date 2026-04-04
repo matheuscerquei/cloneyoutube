@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Belle Hair Salon</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Ícones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png">
+        <span>Belle Hair</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#Serviços">Serviços</a></li>
+            <li><a href="#Agendamento">Agendamento</a></li>
+            <li><a href="#contato">Contato</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <!-- botão pequeno -->
+    <button onclick="trocarTema()" class="tema-btn">
+        <i class="fas fa-moon"></i>
+    </button>
+
+</header>
+
+<main>
+
+<section class="Serviços" id="Serviços">
+
+    <div class="servico">
+        <h3>Cabelo</h3>
+        <p>Transforme seu visual...</p>
+        <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9">
+    </div>
+
+    <div class="servico">
+        <h3>Unha</h3>
+        <p>Cuide das suas unhas...</p>
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371">
+    </div>
+
+    <div class="servico">
+        <h3>Estética Facial</h3>
+        <p>Revitalize sua pele...</p>
+        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03">
+    </div>
+
+    <div class="servico">
+        <h3>Corpo e Bem-estar</h3>
+        <p>Relaxe e revitalize...</p>
+        <img src="https://images.unsplash.com/photo-1552693673-1bf958298935">
+    </div>
+
+    <div class="servico">
+        <h3>Maquiagem</h3>
+        <p>Realce sua beleza...</p>
+        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e">
+    </div>
+
+</section>
+
+<section class="Agendamento" id="Agendamento">
+    <h2>Agendamento</h2>
+    <p>Agende seu horário conosco</p>
+    <div class="formulario">
+
+        <form id="form-agendamento">
+
+            <input type="text" id="nome" placeholder="Seu nome" required>
+
+            <input type="email" id="email" placeholder="Seu email" required>
+
+            <input type="tel" id="telefone" placeholder="Seu telefone" required>
+
+            <select id="servico" required>
+                <option value="">Escolha um serviço</option>
+                <option>Cabelo</option>
+                <option>Unha</option>
+                <option>Estética Facial</option>
+                <option>Corpo e Bem-estar</option>
+                <option>Maquiagem</option>
+            </select>
+
+            <input type="date" id="data" required>
+
+            <button type="submit">Agendar</button>
+
+        </form>
+
+        <p id="mensagem"></p>
+
+    </div>
+</section>
+
+</main>
+
+<footer class="footer" id="contato">
+    <p>© 2026 Belle Hair Salon</p>
+
+    <a href="https://wa.me/5571982344578" target="_blank" class="btn-contato whatsapp">
+        <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+</footer>
+
+<script>
+function trocarTema() {
+    document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>

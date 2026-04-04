@@ -1,0 +1,225 @@
+/* ===== RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff;
+    color: #333;
+    transition: 0.3s;
+}
+
+/* ===== HEADER ===== */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #C76C8A, #b85c78);
+    color: white;
+}
+
+/* LOGO */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    width: 45px;
+}
+
+.logo-container span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* ===== NAV ===== */
+nav ul {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    position: relative;
+}
+
+/* Efeito underline */
+nav ul li a::after {
+    content: "";
+    width: 0%;
+    height: 2px;
+    background: white;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* ===== BOTÃO DARK ===== */
+.tema-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tema-btn:hover {
+    transform: scale(1.2);
+}
+
+/* ===== SERVIÇOS ===== */
+.Serviços {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 40px;
+    gap: 25px;
+}
+
+/* CARD */
+.servico {
+    background: #F8C8DC;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.servico:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.servico h3 {
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+}
+
+.servico p {
+    margin-bottom: 10px;
+}
+
+/* IMAGEM */
+.servico img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* ===== AGENDAMENTO ===== */
+.Agendamento {
+    background: #111;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.Agendamento h2 {
+    color: #E89AB0;
+    margin-bottom: 10px;
+}
+
+.Agendamento p {
+    color: #ccc;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #111;
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+/* ===== BOTÃO WHATSAPP ===== */
+.btn-contato {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    padding: 10px 16px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+.btn-contato:hover {
+    background: #1ebe5d;
+    transform: scale(1.05);
+}
+
+/* ===== DARK MODE ===== */
+body.dark {
+    background-color: #111;
+    color: white;
+}
+
+body.dark header {
+    background: #222;
+}
+
+body.dark .servico {
+    background: #1a1a1a;
+}
+
+body.dark .Agendamento {
+    background: #000;
+}
+
+body.dark .footer {
+    background: #000;
+}
+
+.formulario {
+    max-width: 400px;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario input,
+.formulario select {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    background: #222;
+    color: white;
+}
+
+.formulario button {
+    padding: 12px;
+    background: #E89AB0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.formulario button:hover {
+    background: #f1648c;
+}
+
+#mensagem {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #E89AB0;
+}
